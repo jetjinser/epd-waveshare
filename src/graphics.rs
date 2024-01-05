@@ -354,7 +354,7 @@ fn set_pixel<COLOR: ColorType>(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::color::*;
+    use crate::{color::*, epd7in3f::Display7in3f};
     use embedded_graphics::{
         prelude::*,
         primitives::{Line, PrimitiveStyle},
@@ -447,6 +447,21 @@ mod tests {
 
         for &byte in buffer.iter().skip(1) {
             assert_eq!(byte, 0);
+        }
+    }
+
+    #[test]
+    fn display_oct_color() {
+        use std::println;
+
+        let mut display = Display::<4, 4, false, { 4 * 4 / 2 }, OctColor>::default();
+        display.clear(OctColor::White).unwrap();
+
+        let buffer = display.buffer();
+
+        // println!();
+        for byte in buffer {
+            // println!("{:08b}", byte);
         }
     }
 }
