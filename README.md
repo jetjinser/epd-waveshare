@@ -22,24 +22,22 @@ There are multiple examples in the examples folder. Use `cargo run --example exa
 
 ```Rust
 // Setup the epd
-let mut epd = Epd4in2::new( & mut spi, cs, busy, dc, rst, & mut delay) ?;
+let mut epd = Epd4in2::new(&mut spi, cs, busy, dc, rst, &mut delay)?;
 
 // Setup the graphics
-let mut display = Display4in2::default ();
+let mut display = Display4in2::default();
 
 // Draw some text
-display.draw(
-let _ = Text::new("Hello Rust!", Point::new(x, y))
-.into_styled(text_style!(
-            font = Font12x16,
-            text_color = Black,
-            background_color = White
-        ))
-.draw(display);
-);
+_ = Text::new("Hello Rust!", Point::new(x, y))
+    .into_styled(text_style!(
+        font = Font12x16,
+        text_color = Black,
+        background_color = White
+    ))
+    .draw(display);
 
 // Transfer the frame data to the epd and display it
-epd.update_and_display_frame( & mut spi, & display.buffer()) ?;
+epd.update_and_display_frame(&mut spi, display.buffer())?;
 ```
 
 ## (Supported) Devices
@@ -50,6 +48,7 @@ epd.update_and_display_frame( & mut spi, & display.buffer()) ?;
 | [7.5 Inch B/W HD (A)](https://www.waveshare.com/product/displays/e-paper/epaper-1/7.5inch-hd-e-paper-hat.htm) | Black, White | ✕ | ✕ | ✔ | ✔ |
 | [7.5 Inch B/W V2 (A)](https://www.waveshare.com/product/7.5inch-e-paper-hat.htm) [[1](#1-75-inch-bw-v2-a)] | Black, White | ✕ | ✕ | ✔ | ✔ |
 | [7.5 Inch B/W (A)](https://www.waveshare.com/product/7.5inch-e-paper-hat.htm) | Black, White | ✕ | ✕ | ✔ | ✔ |
+| [7.3 Inch HAT (F)](https://www.waveshare.com/product/7.3inch-e-paper-hat-f.htm) | Black, White, Red, Green, Blue, Yellow, Orange | ✕ | ✕ | ✔ | ✔ |
 | [5.83 Inch B/W/R (b)](https://www.waveshare.com/5.83inch-e-Paper-B.htm) | Black, White, Red | ✕ | Not officially | ✔ | ✔ |
 | [5.65 Inch 7 Color (F)](https://www.waveshare.com/5.65inch-e-paper-module-f.htm) | Black, White, Red, Green, Blue, Yellow, Orange | ✕ | ✕ | ✔ | ✔ |
 | [4.2 Inch B/W (A)](https://www.waveshare.com/product/4.2inch-e-paper-module.htm) | Black, White | ✕ | Not officially [[2](#2-42-inch-e-ink-blackwhite---partial-refresh)] | ✔ | ✔ |
